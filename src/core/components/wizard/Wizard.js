@@ -1,15 +1,23 @@
 import React from 'react';
-import Steps from '../features/shipping-label-maker/Steps'
+import propTypes from 'prop-types';
+const Wizard = ({ children, currentStep = 0,  handleSubmit, header, steps, onComplete }) => {
 
- const Wizard = ({ currentStep=0,  wizardContext=0, stepForward=f=>f, stepBack=f=>f }) =>{
-  let sb = stepBack;
-  let sf = stepForward;
   return (
-  <div>
-    {wizardContext}
-    <button onClick={sb}>stepBack</button>
-    <button onClick={sf}>stepForward</button>
-  </div>
+    <div>
+      {children}
+      <h3>{header()}</h3>
+      step: {currentStep}
+      <form onSubmit={handleSubmit}>
+        {steps[currentStep]}
+
+      </form>
+    </div>
   );
- }
-  export default Wizard; 
+}
+Wizard.propTypes = {
+  header: propTypes.func.isRequired,
+  steps: propTypes.array.isRequired,
+  wizardContext: propTypes.object.isRequired,
+  onComplete: propTypes.func.isRequired
+}
+export default Wizard; 
