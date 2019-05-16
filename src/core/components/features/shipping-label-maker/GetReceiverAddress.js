@@ -1,8 +1,18 @@
+/* *
+  title: GetReceiverAddress.js 
+
+  date: 5/10/2019
+
+  author:  javier olaya
+
+  description: component that handles getting the receivers address 
+         
+ */
 import React from 'react';
 import propTypes from 'prop-types';
 import Steps from './Steps';
 
-const GetReceiverAddress = ({ wizardAction, wizardContext, handleChange, onAction, currentStep = 0, }) => {
+const GetReceiverAddress = ({ wizardAction, currentStep, handleChange, onAction, wizardContext }) => {
   let { to } = wizardContext;
   if (currentStep !== 0) return null;
   return (<div >

@@ -1,8 +1,18 @@
+/* *
+  title: GetSenderAddress.js 
+
+  date: 5/10/2019
+
+  author:  javier olaya
+
+  description: component that handles getting the senders address
+         
+ */
 import React from 'react';
 import propTypes from 'prop-types';
 import Steps from './Steps';
 
-const GetSenderAddress = ({ wizardAction, wizardContext, onAction, currentStep = 0, handleChange = f => f }) => {
+const GetSenderAddress = ({ wizardAction, currentStep, handleChange, onAction, wizardContext }) => {
   let { from } = wizardContext;
   if (currentStep !== 1) return null;
   return (<div>

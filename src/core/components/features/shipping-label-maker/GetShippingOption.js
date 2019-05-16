@@ -1,8 +1,18 @@
+/* *
+  title: GetShippingOption.js 
+
+  date: 5/10/2019
+
+  author:  javier olaya
+
+  description: component that handles getting shipping options
+         
+ */
 import React from 'react';
 import propTypes from 'prop-types';
 import Steps from './Steps';
 
-const GetShippingOption = ({ wizardAction,  onAction, shippingOption, currentStep, handleChange }) => {
+const GetShippingOption = ({wizardContext, currentStep, handleChange, onAction, wizardAction  }) => {
   if (currentStep !== 2) return null;
   return (<div>
     Get Shipping Option

@@ -1,6 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
-const Wizard = ({ children, currentStep = 0,  handleSubmit, header, steps, onComplete }) => {
+const Wizard = ({ wizardContext, currentStep, handleSubmit, header, steps, onComplete, children}) => {
 
   return (
     <div>
@@ -9,7 +9,6 @@ const Wizard = ({ children, currentStep = 0,  handleSubmit, header, steps, onCom
       step: {currentStep}
       <form onSubmit={handleSubmit}>
         {steps[currentStep]}
-
       </form>
     </div>
   );

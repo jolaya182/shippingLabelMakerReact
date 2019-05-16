@@ -1,3 +1,13 @@
+/* *
+  title: ShippingLabelMarker.js 
+
+  date: 5/10/2019
+
+  author:  javier olaya
+
+  description: component that handles the main logic for accessing and organizing the shipping labels
+         
+ */
 import React from 'react';
 import Wizard from '../../wizard/Wizard';
 import Confirm from './Confirm';
@@ -10,6 +20,7 @@ import Progressbar from './Progressbar';
 import ShippingOption from './ShippingOption';
 
 export default class ShippingLabelMarker extends React.Component {
+ /* define the state properties of the symbol and its balance sheet */
   constructor(props) {
     super(props);
     this.state = {
@@ -25,7 +36,7 @@ export default class ShippingLabelMarker extends React.Component {
       fromCity: "",
       fromState: "",
       fromZip: "",
-      weight: 0,
+      weight: 1,
       shippingOption: "ground",
       totalSteps: 5,
       cost:0,
@@ -35,7 +46,13 @@ export default class ShippingLabelMarker extends React.Component {
       end:null,
     }
   }
+ /* 
+  @description method tha updates the current step goinf forward 
+  and current state of the buttons 
 
+  @param props
+
+  */
   stepForward = props => {
     this.setState((state, props) => ({
       currentStep: state.currentStep + 1 >= state.totalSteps ? state.totalSteps : state.currentStep + 1,
@@ -45,6 +62,13 @@ export default class ShippingLabelMarker extends React.Component {
     }))
   }
 
+   /* 
+  @description method tha updates the current step  going backwards and 
+  current state of the buttons 
+
+  @param props
+
+  */
   stepBack = props => {
     this.setState((state, props) => ({
       currentStep: state.currentStep - 1 <= 0 ? 0 : state.currentStep - 1,
@@ -54,6 +78,12 @@ export default class ShippingLabelMarker extends React.Component {
     }))
   }
 
+ /* 
+  @description callback for when a word is typed into the text input box 
+
+  @param event object
+
+  */
   handleChange = (event) => {
     const { name, value } = event.target;
     let { cost } = this.state;
@@ -61,6 +91,12 @@ export default class ShippingLabelMarker extends React.Component {
     this.setState((state, props) => ({ [name]: value, cost: cost }));
   }
 
+  /* 
+  @description callback for when a word is submitted into the text input box 
+
+  @param event object
+
+  */
   handleSubmit = (event) => {
     event.preventDefault();
     let { currentStep,
@@ -92,20 +128,47 @@ export default class ShippingLabelMarker extends React.Component {
       shippingOption);
   }
 
+  /* 
+  @description calculates the cost of shipping based othe rates  
+
+  @param number
+
+  @return number
+
+  */
   calculateWeight = (weight) => {
     const shippingRate = 0.40;
     const { shippingOption } = this.state;
     return Math.round( (shippingRate * weight * (shippingOption === ShippingOption.ground ? 1 : 1.5))*100 )/100;
   }
 
+  /* 
+  @description returns the header name of the application  
+
+  @return number
+
+  */
   header = () => {
     return this.state.header;
   }
 
+  /* 
+  @description method that allows for the creation for the label  
+
+  @return bool
+
+  */
   onComplete = () => {
     return true;
   }
 
+  /* 
+  @description returns the shipping option type, 
+  weight and receiver and sender address  
+
+  @return obj
+
+  */
   getWizardContext = () =>{
     return {
       from:{
@@ -127,10 +190,22 @@ export default class ShippingLabelMarker extends React.Component {
     }
   }
 
+  /* 
+  @description returns the prev next and end state for the buttons  
+
+  @return obj
+
+  */  
   wizardAction = () =>{
     return {"prev":this.state.prev,"next":this.state.next, "end":this.state.end}
   }
 
+  /* 
+  @description returns the header name of the application
+  
+  @param event object
+
+  */
   onAction = (event) => {
     event.preventDefault();
     const ident = event.target.id;
@@ -142,14 +217,18 @@ export default class ShippingLabelMarker extends React.Component {
   }
 
   render() {
+    /* get methods and property values */
     const { currentStep,  totalSteps } = this.state;
     const { handleSubmit, handleChange, header, onComplete, getWizardContext, onAction, wizardAction } = this;
-    const curstate = this.state;
     const wizardContext = this.getWizardContext();
+
+    /* calculate progress bar px percentage */
     const percentage = currentStep == 0 ? 0 : ((100 / totalSteps) * currentStep);
+
+    /* create an array of steps */
     let currStep1,currStep2,currStep3,currStep4,currStep5,currStep6;
       currStep1 = (<GetReceiverAddress
-        wizardContext={getWizardContext()} 
+        wizardContext={wizardContext} 
         currentStep={currentStep}
         handleChange={handleChange}
         onAction={onAction}
@@ -157,7 +236,7 @@ export default class ShippingLabelMarker extends React.Component {
       >GetReceiverAddress </GetReceiverAddress>);
 
       currStep2 = (<GetSenderAddress
-      wizardContext={getWizardContext()}
+        wizardContext={wizardContext}
         currentStep={currentStep}
         handleChange={handleChange}
         onAction={onAction}
@@ -165,16 +244,15 @@ export default class ShippingLabelMarker extends React.Component {
       >GetSenderAddress </GetSenderAddress>);
 
       currStep3 = (<GetShippingOption
-      wizardContext={getWizardContext()}
+        wizardContext={wizardContext}
         currentStep={currentStep}
-        shippingOption={this.state.shippingOption}
         handleChange={handleChange}
         onAction={onAction}
         wizardAction={wizardAction()}
       >GetShippingOption</GetShippingOption>);
 
       currStep4 = (<GetWeight
-      wizardContext={getWizardContext()}
+        wizardContext={wizardContext}
         currentStep={currentStep}
         weight={this.state.weight}
         handleChange={handleChange}
@@ -183,10 +261,8 @@ export default class ShippingLabelMarker extends React.Component {
       >GetWeight </GetWeight>);
 
       currStep5 = (<div><Confirm
-      wizardContext={getWizardContext()}
+      wizardContext={wizardContext}
         currentStep={currentStep}
-        handleChange={handleChange}
-        shippingData={curstate}
         onAction={onAction}
         wizardAction={wizardAction()}
       >Confirm </Confirm>
@@ -198,10 +274,8 @@ export default class ShippingLabelMarker extends React.Component {
     return (
       <div>
         <Wizard 
-          currentStep={currentStep}
           wizardContext={wizardContext}
-          forwardButton={this.forwardButton}
-          backButton={this.backButton}
+          currentStep={currentStep}
           handleSubmit={handleSubmit}
           header={header}
           steps={stack}

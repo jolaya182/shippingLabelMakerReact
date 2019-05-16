@@ -4,7 +4,7 @@ const ShippingLabel = ({ wizardContext }) => {
   return (<div>
     <br></br>
     ShippingLabel
-    congradulations here is your shipping label:
+    congratulations here is your shipping label:
     {Object.keys(wizardContext.to).map(function (key, index) {
       let st = key + ": " + wizardContext.to[key];
       return <div key={index}>{st}</div>
@@ -13,8 +13,8 @@ const ShippingLabel = ({ wizardContext }) => {
       let st = key + ": " + wizardContext.from[key];
       return <div key={index}>{st}</div>
     })}
-    {wizardContext.weight}
-    {wizardContext.shippingOption}
+    <div>{ "weight: " + wizardContext.weight}</div>
+    <div>{ "shippingOption: " + wizardContext.shippingOption}</div>
   </div>);
 }
 export default ShippingLabel;
