@@ -28,8 +28,8 @@ const GetReceiverAddress = ({ wizardAction, currentStep, handleChange, onAction,
     <input onChange={handleChange} name="toState" id="toState" type="text" value={to.toState} placeholder={to.toState}></input><br></br>
     <label > zip</label><br></br>
     <input onChange={handleChange} name="toZip" id="toZip" type="text" value={to.toZip} placeholder={to.toZip}></input><br></br>
-    <Steps onAction={onAction} wizardAction={wizardAction}></Steps>
-  </div>
+{/*     <Steps onAction={onAction} wizardAction={wizardAction}></Steps>
+ */}  </div>
   );
 };
 

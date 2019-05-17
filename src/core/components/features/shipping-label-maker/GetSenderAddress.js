@@ -28,8 +28,8 @@ const GetSenderAddress = ({ wizardAction, currentStep, handleChange, onAction, w
     <input onChange={handleChange} name="fromState" id="fromState" type="text" value={from.fromState} placeholder={from.fromState}></input><br></br>
     <label  > zip</label><br></br>
     <input onChange={handleChange} name="fromZip" id="fromZip" type="text" value={from.fromZip} placeholder={from.fromZip}></input><br></br>
-    <Steps onAction={onAction} wizardAction={wizardAction}></Steps>
-  </div>);
+{/*     <Steps onAction={onAction} wizardAction={wizardAction}></Steps>
+ */}  </div>);
 };
 
 GetSenderAddress.propTypes = {

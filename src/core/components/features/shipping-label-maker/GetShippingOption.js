@@ -22,8 +22,8 @@ const GetShippingOption = ({wizardContext, currentStep, handleChange, onAction, 
       <option onChange={handleChange} name="shippingOption" value="ground">ground</option>
       <option onChange={handleChange} name="shippingOption" value="priority">priority</option>
     </select><br></br>
-    <Steps onAction={onAction} wizardAction={wizardAction}></Steps>
-  </div>
+{/*     <Steps onAction={onAction} wizardAction={wizardAction}></Steps>
+ */}  </div>
   );
 };
 

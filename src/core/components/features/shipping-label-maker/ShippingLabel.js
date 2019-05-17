@@ -2,7 +2,6 @@ import React from 'react';
 
 const ShippingLabel = ({ wizardContext }) => {
   return (<div>
-    <br></br>
     ShippingLabel
     congratulations here is your shipping label:
     {Object.keys(wizardContext.to).map(function (key, index) {
@@ -13,8 +12,8 @@ const ShippingLabel = ({ wizardContext }) => {
       let st = key + ": " + wizardContext.from[key];
       return <div key={index}>{st}</div>
     })}
-    <div>{ "weight: " + wizardContext.weight}</div>
-    <div>{ "shippingOption: " + wizardContext.shippingOption}</div>
+    <div>{"weight: " + wizardContext.weight}</div>
+    <div>{"shippingOption: " + wizardContext.shippingOption}</div>
   </div>);
 }
 export default ShippingLabel;

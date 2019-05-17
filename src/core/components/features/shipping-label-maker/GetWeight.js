@@ -19,8 +19,8 @@ const GetWeight = ({ wizardContext, currentStep, weight, handleChange, onAction,
     <br></br>
     <label  >Weight </label><br></br>
     <input id="weight" type="text" onChange={handleChange} name="weight" value={weight} ></input><br></br>
-    <Steps onAction={onAction} wizardAction={wizardAction}></Steps>
-  </div>);
+{/*     <Steps onAction={onAction} wizardAction={wizardAction}></Steps>
+ */}  </div>);
 };
 
 GetWeight.propTypes = {

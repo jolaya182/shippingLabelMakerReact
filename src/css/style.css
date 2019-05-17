@@ -13,3 +13,7 @@ border-radius: inherit;
 transition: width .2s ease-in;
 }
 
+.form{
+  background-color: silver;
+  text-align: center
+}
